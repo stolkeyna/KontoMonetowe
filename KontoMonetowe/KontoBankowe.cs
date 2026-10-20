@@ -9,6 +9,7 @@ namespace KontoMonetowe
         private double _saldo;
         //private string _nrKonta;
         private string _wlasciciel;
+        private int _pin;
 
         public double Saldo
         {
@@ -47,6 +48,17 @@ namespace KontoMonetowe
                 }
             }
         }
+        public int Pin
+        {
+            get
+            {
+                return _pin;
+            }
+            set
+            {
+
+            }
+        }
         //public string NrKonta
         //{
         //    get
@@ -59,6 +71,15 @@ namespace KontoMonetowe
         {
             _wlasciciel = nowyWlasciciel;
             _saldo = 0;
+            if (ustawionyPin.ToString().Length < 4 && ustawionyPin.ToString().Length > 4)
+            {
+                _pin = 0000;
+                Console.WriteLine("Pin nie może mieć tylko 4 cyfry. Pin był ustawiony na 0000.");
+            }
+            else
+            {
+                _pin = ustawionyPin;
+            }
             //_nrKonta += 1;
             Console.WriteLine($"Utworzone nowe konto dla {_wlasciciel}");
         }
@@ -66,7 +87,7 @@ namespace KontoMonetowe
         //funkcje do objektu
         public void WyswietlInformacje()
         {
-            Console.WriteLine($"Właścicel: {_wlasciciel}    |Saldo: {_saldo}");
+            Console.WriteLine($"Właścicel: {_wlasciciel}    |Saldo: {_saldo:C}");
         }
     }
 }
