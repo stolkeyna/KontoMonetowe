@@ -11,12 +11,25 @@
             Automat automat1 = new Automat();
 
             KontoA.WyswietlInformacje();
-            automat1.WrzucMonete(KontoA, 0.50, 1234);
+
+            Console.WriteLine("0.5");
+            automat1.WrzucMonete(KontoA, "0.5", 1234);
             KontoA.WyswietlInformacje();
-            automat1.WrzucMonete(KontoA, 5.0, 1234);
+
+            Console.WriteLine("0,5");
+            automat1.WrzucMonete(KontoA, "0,5", 1234);
             KontoA.WyswietlInformacje();
-            automat1.WrzucMonete(KontoA, 6.0, 1234);
-            automat1.WrzucMonete(KontoA, 5.0, 1235);
+
+            Console.WriteLine("5");
+            automat1.WrzucMonete(KontoA, "5", 1234);
+            KontoA.WyswietlInformacje();
+
+            Console.WriteLine("6");
+            automat1.WrzucMonete(KontoA, "6", 1234);
+
+            Console.WriteLine("abc");
+            automat1.WrzucMonete(KontoA, "abc", 1234);
+            automat1.WrzucMonete(KontoA, "5", 1235);
         }
     }
 }

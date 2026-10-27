@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace KontoMonetowe
@@ -16,44 +17,31 @@ namespace KontoMonetowe
         {
             get { return _iloscMonet; }
         }
-        private readonly decimal[] _przyjmowaneMonety = new decimal[] {5, 2, 1, 0.5m, 0.2m, 0.1m};
+        private readonly decimal[] _przyjmowaneMonety = new decimal[] { 5, 2, 1, 0.5m, 0.2m, 0.1m };
 
-        public void WrzucMonete(KontoBankowe konto, double RodzajMonety, int Pin)
+        public void WrzucMonete(KontoBankowe konto, string Moneta, int Pin)
         {
-            if(Pin == konto.Pin)
+            string MonetaUjednoliczonyZapis = Moneta.Replace(",", ".");
+            if (Pin == konto.Pin)
             {
-                if (RodzajMonety == 5.0 || RodzajMonety == 2.0 || RodzajMonety == 1.0 || RodzajMonety == 0.50 || RodzajMonety == 0.20 || RodzajMonety == 0.10)
+                //Sprawdzamy czy monete w ogóle sparsować na jakiś decimal
+                bool CzyUdanyParse = decimal.TryParse(Moneta, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out decimal WartoscMonety);
+                if (!CzyUdanyParse)
                 {
-                    switch (RodzajMonety)
+                    Console.WriteLine("Nieudany odczyt monety.");
+                    return;
+                }
+                //Sprawdz czy wrzucona moneta jest z zakresu _przyjmowaneMonety
+                foreach (decimal nominal in _przyjmowaneMonety)
+                {
+                    if(WartoscMonety == nominal)
                     {
-                        case 5.0:
-                            konto.Saldo += 5;
-                            Console.WriteLine("Wrzucono 5zł.");
-                            break;
-                        case 2.0:
-                            konto.Saldo += 2.0;
-                            Console.WriteLine("Wrzucono 2zł.");
-                            break;
-                        case 1.0:
-                            konto.Saldo += 1.0;
-                            Console.WriteLine("Wrzucono 1zł.");
-                            break;
-                        case 0.50:
-                            konto.Saldo += 0.50;
-                            Console.WriteLine("Wrzucono 50gr.");
-                            break;
-                        case 0.20:
-                            konto.Saldo += 0.20;
-                            Console.WriteLine("Wrzucono 20gr.");
-                            break;
-                        case 0.10:
-                            konto.Saldo += 0.10;
-                            Console.WriteLine("Wrzucono 10gr.");
-                            break;
+                        //konto.Saldo += nominal;
+                        konto.Wplac(nominal);
+                        _iloscMonet++;
+                        Console.WriteLine($"Przyjęto monetę {WartoscMonety}. Wrzucono {MonetaUjednoliczonyZapis} zł.");
+                        break;
                     }
-                }else
-                {
-                    Console.WriteLine("Nierozpoznany typ monety!");
                 }
             }
             else

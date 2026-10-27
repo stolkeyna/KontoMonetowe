@@ -6,12 +6,12 @@ namespace KontoMonetowe
 {
     internal class KontoBankowe
     {
-        private double _saldo;
-        //private string _nrKonta;
+        private decimal _saldo;
         private string _wlasciciel;
         private int _pin;
+        //private string _numer;
 
-        public double Saldo
+        public decimal Saldo
         {
             get
             {
@@ -59,11 +59,11 @@ namespace KontoMonetowe
 
             }
         }
-        //public string NrKonta
+        //public string Numer
         //{
         //    get
         //    {
-        //        return _nrKonta;
+        //        return _numer;
         //    }
         //}
 
@@ -80,7 +80,7 @@ namespace KontoMonetowe
             {
                 _pin = ustawionyPin;
             }
-            //_nrKonta += 1;
+            //_numer += 1;
             Console.WriteLine($"Utworzone nowe konto dla {_wlasciciel}");
         }
 
@@ -88,6 +88,10 @@ namespace KontoMonetowe
         public void WyswietlInformacje()
         {
             Console.WriteLine($"Właścicel: {_wlasciciel}    |Saldo: {_saldo:C}");
+        }
+        public void Wplac(decimal nominal)
+        {
+            Saldo += nominal;
         }
     }
 }
