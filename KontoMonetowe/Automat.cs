@@ -7,11 +7,6 @@ namespace KontoMonetowe
 {
     internal class Automat
     {
-        //Przyjmyje tylko monety
-        //Dodaje monety na konto
-        //Przyjmuje monety 5, 2, 1, 0.50, 0.20, 0.10
-        //Liczy ilość wrzuconych monet
-
         private int _iloscMonet;
         public int IloscMonet
         {

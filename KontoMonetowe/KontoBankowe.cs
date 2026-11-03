@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Security;
 using System.Text;
 
 namespace KontoMonetowe
 {
     internal class KontoBankowe
     {
+        Random rnd = new Random();
         private decimal _saldo;
         private string _wlasciciel;
         private int _pin;
@@ -67,13 +69,15 @@ namespace KontoMonetowe
                 }
             }
         }
-        //public string Numer
-        //{
-        //    get
-        //    {
-        //        return _numer;
-        //    }
-        //}
+        public string NumerKonta
+        {
+            get
+            {
+                return _numerKonta;
+            }
+            set { }
+
+        }
 
         public KontoBankowe(string nowyWlasciciel, int ustawionyPin)
         {
@@ -81,12 +85,17 @@ namespace KontoMonetowe
             Saldo = 0;
             Pin = ustawionyPin;
             Console.WriteLine($"Utworzone nowe konto dla {_wlasciciel}");
+            for (int i = 0; i < 24; i++)
+            {
+                var nastepnaLiczbaNumeru = rnd.Next(0, 10);
+                _numerKonta = _numerKonta += nastepnaLiczbaNumeru.ToString();
+            }
         }
 
         //funkcje do objektu
         public void WyswietlInformacje()
         {
-            Console.WriteLine($"Właścicel: {_wlasciciel}    |Saldo: {_saldo:C}");
+            Console.WriteLine($"Właścicel: {Wlascicel}    |Saldo: {Saldo:C}    |Numer konta: {_numerKonta}");
         }
         public void Wplac(decimal nominal)
         {
