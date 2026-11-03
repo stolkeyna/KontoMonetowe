@@ -9,7 +9,7 @@ namespace KontoMonetowe
         private decimal _saldo;
         private string _wlasciciel;
         private int _pin;
-        //private string _numer;
+        private string _numerKonta;
 
         public decimal Saldo
         {
@@ -38,13 +38,13 @@ namespace KontoMonetowe
             set
             {
                 //walidacja
-                if (!string.IsNullOrWhiteSpace(value))
+                if (value == string.Empty)
                 {
-                    _wlasciciel = value;
+                    throw new ArgumentException("Błąd: nazwa wlaściciela nie może być pusta!");
                 }
                 else
                 {
-                    Console.WriteLine("Błąd: nazwa wlaściciela nie może być pusta!");
+                    _wlasciciel = value;
                 }
             }
         }
@@ -56,7 +56,15 @@ namespace KontoMonetowe
             }
             set
             {
-
+                if (value.ToString().Length == 4)
+                {
+                    _pin = value;
+                }
+                else
+                {
+                    _pin = 0000;
+                    throw new ArgumentException("Błąd: Pin ma mieć dokładnie 4 cyfry.");
+                }
             }
         }
         //public string Numer
@@ -69,18 +77,9 @@ namespace KontoMonetowe
 
         public KontoBankowe(string nowyWlasciciel, int ustawionyPin)
         {
-            _wlasciciel = nowyWlasciciel;
-            _saldo = 0;
-            if (ustawionyPin.ToString().Length < 4 && ustawionyPin.ToString().Length > 4)
-            {
-                _pin = 0000;
-                Console.WriteLine("Pin nie może mieć tylko 4 cyfry. Pin był ustawiony na 0000.");
-            }
-            else
-            {
-                _pin = ustawionyPin;
-            }
-            //_numer += 1;
+            Wlascicel = nowyWlasciciel;
+            Saldo = 0;
+            Pin = ustawionyPin;
             Console.WriteLine($"Utworzone nowe konto dla {_wlasciciel}");
         }
 
