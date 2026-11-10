@@ -7,10 +7,13 @@ namespace KontoMonetowe
         static void Main(string[] args)
         {
             //Niewypełnione wymagania:
-            //-Automat poprawnie odczytuje monety zapisane z kropką(np. "0.5"), niezależnie od ustawień komputera. (nie przyjmuje 0,5 ???)
-            //--zła moneta, gdy to liczba, ale automat nie przyjmuje takiego nominału(np. "3") (komunikat wyświetla się więzej razy niż trzeba, bo wypisuje go dla każdego elementu w liście przyjmowanych monet)
             //--Automat liczy osobno, ile monet każdego nominału przyjął.
             //--Automat ma metodę PokazMonety(), która wypisuje liczbę monet każdego nominału i łączną wartość wszystkich monet.
+            //--na koniec automat podaje, ile monet przyjął, a ile zwrócił.
+            //--Automat ma ograniczoną pojemność: mieści określoną liczbę monet każdego nominału. Gdy dla danego nominału nie ma już miejsca, automat zwraca monetę i wypisuje komunikat. Taka moneta nie zmienia stanu konta i liczy się jako zwrócona.
+            //--Konto pamięta historię wpłat i umie wypisać, ile ich było i na jakie kwoty.
+            //--Pokaż, że automat zwraca monetę, gdy nie ma na nią miejsca.
+            //--Na końcu wyświetl historię wpłat i monety w automacie.
 
             //Tworzenie konta
             KontoBankowe KontoA = new KontoBankowe("A", 1234);

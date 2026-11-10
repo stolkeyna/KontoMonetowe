@@ -13,8 +13,7 @@ namespace KontoMonetowe
             get { return _iloscPrzMonet; }
         }
         private readonly decimal[] _przyjmowaneMonety = new decimal[] { 5, 2, 1, 0.5m, 0.2m, 0.1m };
-        private readonly int _ograniczonaPojemnosc = 10;
-
+        private decimal[] _przyjęteMonety = new decimal[] { };
         public void WrzucMonete(KontoBankowe konto, string Moneta, int Pin)
         {
             string[] Monety = Moneta.Split(" ");
@@ -39,6 +38,7 @@ namespace KontoMonetowe
                             //konto.Saldo += nominal;
                             konto.Wplac(nominal);
                             _iloscPrzMonet++;
+                            _przyjęteMonety = new decimal[] {WartoscMonety};
                             Console.WriteLine($"Przyjęto monetę {WartoscMonety}. Wrzucono {WartoscMonety} zł.");
                             Nieprawidlowa = false;
                             break;
