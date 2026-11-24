@@ -97,9 +97,18 @@ namespace KontoMonetowe
         {
             Console.WriteLine($"Właścicel: {Wlascicel}    |Saldo: {Saldo:C}    |Numer konta: {_numerKonta}");
         }
-        public void Wplac(decimal nominal)
+        public void Wplac(decimal kwota)
         {
-            Saldo += nominal;
+            _saldo += kwota;
+        }
+        public void Wyplac(decimal kwota)
+        {
+            if( kwota < 0 || kwota > _saldo)
+            {
+                Console.WriteLine("Błąd: wpisana kwota jest większa od salda lub mniej niż 0.");
+                return;
+            }
+            _saldo -= kwota;
         }
     }
 }
