@@ -13,7 +13,7 @@ namespace KontoMonetowe
             get { return _saldoBankomatu;}
         }
         private readonly decimal[] _przyjmowaneMonety = new decimal[] { 5, 2, 1, 0.5m, 0.2m, 0.1m };
-        private decimal[] _przyjęteMonety = new decimal[] { };
+        private List<decimal> _przyjęteMonety = new List<decimal>();
         public void ZaladujMonety(string Moneta)
         {
             string[] Monety = Moneta.Split(" ");
@@ -33,7 +33,7 @@ namespace KontoMonetowe
                     if (WartoscMonety == nominal)
                     {
                         _saldoBankomatu += nominal;
-                        _przyjęteMonety = new decimal[] { WartoscMonety };
+                        _przyjęteMonety.Add(nominal);
                         Console.WriteLine($"Przyjęto monetę {WartoscMonety}. Wrzucono {WartoscMonety} zł.");
                         Nieprawidlowa = false;
                         //Console.WriteLine($"Saldo bankomatu: {_saldoBankomatu}");
@@ -56,7 +56,8 @@ namespace KontoMonetowe
                     return;
                 }
                 konto.Wyplac(kwota);
-                Console.WriteLine($"Wypłacono {kwota:c2}");
+                //zamiazt ... wypisuje którymi monetami było wydano wypłaconą kwotę
+                Console.WriteLine($"Wypłacono {kwota:c2}. Otrzymałeś ...");
             }
         }
     }

@@ -18,6 +18,11 @@ namespace KontoMonetowe
         {
             get { return _iloscNiePrzMonet; }
         }
+        private decimal _saldoAutomatu;
+        public decimal SaldoAutomatu
+        {
+            get { return _saldoAutomatu; }
+        }
         private readonly decimal[] _przyjmowaneMonety = new decimal[] { 5, 2, 1, 0.5m, 0.2m, 0.1m };
         private List<decimal> _przyjęteMonety = new List<decimal>();
         public void WrzucMonete(KontoBankowe konto, string Moneta, int Pin)
@@ -45,6 +50,7 @@ namespace KontoMonetowe
                             //konto.Saldo += nominal;
                             konto.Wplac(nominal);
                             _iloscPrzMonet++;
+                            _saldoAutomatu += nominal;
                             _przyjęteMonety.Add(nominal);
                             Console.WriteLine($"Przyjęto monetę {WartoscMonety}. Wrzucono {WartoscMonety} zł.");
                             Nieprawidlowa = false;
@@ -66,11 +72,20 @@ namespace KontoMonetowe
         }
         public void PokazMonety()
         {
-            Console.WriteLine("Przyjęto te monety: ");
-            foreach(decimal moneta  in _przyjęteMonety)
-            {
-                Console.WriteLine(moneta);
-            }
+            //Console.WriteLine("Przyjęto te monety: ");
+            //foreach(decimal moneta  in _przyjęteMonety)
+            //{
+            //    Console.WriteLine(moneta);
+            //}
+            List<decimal> jedenGrosz = _przyjęteMonety.FindAll(moneta => moneta == 0.1m);
+            List<decimal> dwaGroszy = _przyjęteMonety.FindAll(moneta => moneta == 0.2m);
+            List<decimal> piecGroszy = _przyjęteMonety.FindAll(moneta => moneta == 0.5m);
+            List<decimal> piecZloty = _przyjęteMonety.FindAll(moneta => moneta == 5);
+            List<decimal> dwaZloty = _przyjęteMonety.FindAll(moneta => moneta == 2);
+            List<decimal> jedenZloty = _przyjęteMonety.FindAll(moneta => moneta == 1);
+
+            Console.WriteLine($"Przyjęto: 0.1 -> {jedenGrosz.Count}  |0.2 -> {dwaGroszy.Count}  |0.5 -> {piecGroszy.Count}  |1 -> {jedenZloty.Count}  |2 -> {dwaZloty.Count}  |5 -> {piecZloty.Count}");
+            Console.WriteLine($"Łączna wartość monet: {_saldoAutomatu}");
         }
     }
 }

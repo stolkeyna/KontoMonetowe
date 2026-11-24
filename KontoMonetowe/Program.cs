@@ -7,11 +7,13 @@ namespace KontoMonetowe
         static void Main(string[] args)
         {
             //Niewypełnione wymagania:
-            //--Automat liczy osobno, ile monet każdego nominału przyjął.
-            //--Automat ma metodę PokazMonety(), która wypisuje liczbę monet każdego nominału i łączną wartość wszystkich monet.
+            //-------Etap 2
             //--na koniec automat podaje, ile monet przyjął, a ile zwrócił.
             //--Automat ma ograniczoną pojemność: mieści określoną liczbę monet każdego nominału. Gdy dla danego nominału nie ma już miejsca, automat zwraca monetę i wypisuje komunikat. Taka moneta nie zmienia stanu konta i liczy się jako zwrócona.
             //--Pokaż, że automat zwraca monetę, gdy nie ma na nią miejsca.
+            //-------Etap 3
+            //--..Monety dobiera od największego nominału, biorąc tylko te, które ma w pojemniku
+            //--Bankomat umie wypisać, ile monet każdego nominału ma w pojemniku i ile to razem złotych.
 
             //Tworzenie konta
             KontoBankowe KontoA = new KontoBankowe("A", 1234);
@@ -34,6 +36,8 @@ namespace KontoMonetowe
             Console.WriteLine("___________________________________");
             bankomat1.ZaladujMonety("0.5 2 1 0.2 3 asd 5");
             bankomat1.Wyplac(KontoA, 1, 1234);
+            KontoA.WyswietlInformacje();
+            Console.WriteLine("___________________________________");
             bankomat1.Wyplac(KontoA, 130, 1234);
             bankomat1.Wyplac(KontoA, -1, 1234);
         }
